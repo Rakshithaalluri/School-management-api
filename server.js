@@ -5,7 +5,6 @@ const app = express();
 
 app.use(express.json());
 
-// Connect to SQLite (creates database if not exists)
 const db = new sqlite3.Database('./database.db', (err) => {
   if (err) return console.error(err.message);
   console.log('✅ Connected to SQLite database');
@@ -22,7 +21,6 @@ db.run(`
   )
 `);
 
-// ================= Add School API =================
 app.post('/addSchool', (req, res) => {
   const { name, address, latitude, longitude } = req.body;
 
@@ -38,7 +36,6 @@ app.post('/addSchool', (req, res) => {
   });
 });
 
-// ================= List Schools API =================
 app.get('/listSchools', (req, res) => {
   const { latitude, longitude } = req.query;
 
